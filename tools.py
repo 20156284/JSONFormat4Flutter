@@ -91,9 +91,21 @@ def build_list_construction(t, n):
 def add_param_to_code(code, param):
     (f, t, n) = param
 
+    this_properties_value = ''
+    if t == 'int':
+        this_properties_value = '0'
+    if t == 'bool':
+        this_properties_value = 'false'
+    if t == 'Object':
+        this_properties_value = 'null'
+    if t == 'String':
+        this_properties_value = "''"
+
+
+
     # 先按照基本数据类型方式处理
     properties = '  %s %s;\n' % (t, n)
-    this_properties = 'this.%s, ' % n
+    this_properties = '\nthis.%s=%s, ' % (n,this_properties_value)
     construction = '    %s = jsonRes[\'%s\'];\n' % (n, f)
     to_string = '"%s": $%s,' % (f, n)
 
